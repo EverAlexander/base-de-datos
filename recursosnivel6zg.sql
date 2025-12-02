@@ -25,7 +25,7 @@ CREATE TABLE estado_inventario (
   nombre VARCHAR(30) NOT NULL 
 );
 
-INSERT INTO estado_inventario(nombre) VALUES('En uso'),('Dañada'),('Completa'),('Incompleta'),('Pendiente Mantenimiento');
+INSERT INTO estado_inventario(nombre) VALUES('Buena'),('Dañada'),('Completa'),('Incompleta'),('Pendiente Mantenimiento');
 
 CREATE TABLE ubicaciones (
   id_ubicacion INT AUTO_INCREMENT PRIMARY KEY,
@@ -52,7 +52,7 @@ CREATE TABLE consolas (
 	activofijo VARCHAR(100),
 	id_modelo INT NOT NULL,
 	color VARCHAR(25) not null,
-	observacion VARCHAR(100),
+	observacion VARCHAR(250),
 	id_estado INT NOT NULL,
 	id_ubicacion INT NOT NULL,
 	created_at TIMESTAMP NULL,
@@ -61,7 +61,6 @@ CREATE TABLE consolas (
 	FOREIGN KEY (id_estado) REFERENCES estado_inventario(id_estado),
 	FOREIGN KEY (id_ubicacion) REFERENCES ubicaciones(id_ubicacion)
 );
-
 
 CREATE TABLE consola_complementos (
 	id INT AUTO_INCREMENT PRIMARY KEY,
