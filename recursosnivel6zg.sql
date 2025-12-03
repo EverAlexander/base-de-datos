@@ -25,7 +25,9 @@ CREATE TABLE estado_inventario (
   nombre VARCHAR(30) NOT NULL 
 );
 
-INSERT INTO estado_inventario(nombre) VALUES('Buena'),('Dañada'),('Completa'),('Incompleta'),('Pendiente Mantenimiento');
+INSERT INTO estado_inventario(nombre) VALUES('Bueno'),('Dañado'),('Completa'),('Incompleta'),('Pendiente Mantenimiento');
+
+select *from estado_inventario;
 
 CREATE TABLE ubicaciones (
   id_ubicacion INT AUTO_INCREMENT PRIMARY KEY,
@@ -62,6 +64,22 @@ CREATE TABLE consolas (
 	FOREIGN KEY (id_ubicacion) REFERENCES ubicaciones(id_ubicacion)
 );
 
+CREATE TABLE controles_Consola (
+    numero_serie VARCHAR(100) NOT NULL PRIMARY KEY,
+    descripcion VARCHAR(250),
+    modelo INT NOT NULL,
+    color VARCHAR(25) NOT NULL,
+    id_estado INT NOT NULL,
+    id_ubicacion INT NOT NULL,
+    observacion VARCHAR(300),
+    fechaActualizacion date not null,
+    created_at TIMESTAMP NULL DEFAULT NULL,
+	updated_at TIMESTAMP NULL DEFAULT NULL,
+	FOREIGN KEY (modelo) REFERENCES modelos(id_modelo),
+    FOREIGN KEY (id_estado) REFERENCES estado_inventario(id_estado),
+    FOREIGN KEY (id_ubicacion) REFERENCES ubicaciones(id_ubicacion)
+);
+
 CREATE TABLE consola_complementos (
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	numero_serie VARCHAR(100) NOT NULL,
@@ -73,39 +91,6 @@ CREATE TABLE consola_complementos (
 	FOREIGN KEY (idComplemento) REFERENCES complemento_consola(idComplemento)
 );
 
-
-
-
-
-
-
-
-
-
-
-
-/*Emproceso hasta aqui no he llegado*/
-
-CREATE TABLE controles (
-    id_control INT AUTO_INCREMENT PRIMARY KEY,
-    descripcion VARCHAR(100),
-    modelo INT NOT NULL,
-    color VARCHAR(25) NOT NULL,
-    numero_serie VARCHAR(100) NOT NULL,
-    complementos VARCHAR(100),
-    observacion VARCHAR(100),
-    id_estado INT NOT NULL,
-    id_ubicacion INT NOT NULL,
-	FOREIGN KEY (modelo) REFERENCES modelos(id_modelo),
-    FOREIGN KEY (id_estado) REFERENCES estado_inventario(id_estado),
-    FOREIGN KEY (id_ubicacion) REFERENCES ubicaciones(id_ubicacion)
-);
-
-INSERT INTO controles (descripcion,modelo,color,numero_serie,complementos,observacion,id_estado,id_ubicacion)
-	VALUES('Control de PS5',7,'Blanco','F22400VYP28549607','Cable de carga','Dañado por drift',2,3);
-
-
-
-
+/*Todo limpio  tabla consola_complementos pendiente para su asignacion pero todo esta organizado seria de revisar*/
 
 
